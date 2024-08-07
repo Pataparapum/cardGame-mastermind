@@ -1,0 +1,50 @@
+body {
+    background-color:  #f5f5f5;
+}
+main {
+    width: 500px;
+    margin: auto;
+}
+
+label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    font-size: 18px;
+}
+
+input{
+    width: 250px;
+    height: 30px;
+}
+
+input[type="submit"] {
+    background-color: #fd0c49;
+    border: 1px solid darkgrey;
+    color: white;
+    font-weight: 400;
+    border-radius: 5px;
+}
+
+select {
+    text-align: center;
+}
+
+.formBlock {
+    margin: auto;
+}
+
+.inputForm {
+    width: 250px;
+    height: 30px;
+    font-size: 19px;
+    font-weight: 300;
+    border: 1px solid;
+    border-color: darkgrey;
+    border-radius: 5px;
+}

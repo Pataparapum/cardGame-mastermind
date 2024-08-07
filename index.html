@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card batman game</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <header>
+        <p>imagen</p>
+    </header>
+    <main>
+        <form action="#">
+
+            <div id="nickBlock" class="formBlock">
+                <label for="nick">Create a a nick name</label>
+                <input type="text" id="nick" class="inputForm" placeholder="nick name">
+            </div>
+
+            <div id="levelBlock" class="formBlock">
+                <label for="levelOption">Selecciona un nivel de dificultad</label>
+                <select name="level" id="levelOption" class="inputForm">
+                    <option value="0">...</option>
+                    <option value="facil">Facil</option>
+                    <option value="medio">Medio</option>
+                    <option value="dificil">Dificil</option>
+                </select>
+            </div>
+
+            <div id="avatarBlock" class="formBlock">
+                <div id="avatar">
+                    <label for="avatar">avatar</label>
+                    <div id="avatarContainer">
+                        <img src="#" alt="" id="avatarImg">
+                    </div>
+                </div>
+                <div id="avatarGrid">
+                    <div class="avatarItem">
+                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                    </div>
+                    <div class="avatarItem">
+                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                    </div>
+                </div>
+            </div>
+
+            <div class="formBlock">
+                <p>* Obligatorio</p>
+            </div>
+
+            <div class="formBlock">
+                <input type="submit" value="PLAY" id="play">
+            </div>
+
+        </form>
+    </main>
+    <footer>
+        
+    </footer>
+</body>
+</html>
