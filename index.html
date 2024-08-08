@@ -4,27 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card batman game</title>
+    <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
     <header>
-        <p>imagen</p>
+        <img src="./img/logo.jpg" alt="Logo" id="logo">
     </header>
     <main>
         <form action="#">
 
             <div id="nickBlock" class="formBlock">
-                <label for="nick">Create a a nick name</label>
+                <label for="nick">introduce tu nick name*</label>
                 <input type="text" id="nick" class="inputForm" placeholder="nick name">
             </div>
 
             <div id="levelBlock" class="formBlock">
-                <label for="levelOption">Selecciona un nivel de dificultad</label>
-                <select name="level" id="levelOption" class="inputForm">
-                    <option value="0">...</option>
-                    <option value="facil">Facil</option>
-                    <option value="medio">Medio</option>
-                    <option value="dificil">Dificil</option>
+                <div>
+                    <p>Selecciona dificultad*</p>
+                </div>
+
+                <div id="radioRow">
+                    <div class="radioBlock">
+                        <input type="radio" id="facil" name="level" class="radioInput" value="">
+                        <label for="facil" class="radioLabel">Facil</label>
+                    </div>
+    
+                    <div class="radioBlock">
+                        <input type="radio" id="medio" name="level" class="radioInput" value="medio">
+                        <label for="medio" class="radioLabel">Medio</label>
+                    </div>
+    
+                    <div class="radioBlock">
+                        <input type="radio" id="dificil" name="level" class="radioInput" value="dificil">
+                        <label for="dificil" class="radioLabel">Dificil</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="cardtBlock" class="formBlock">
+                <label for="cardNum">Tamaño*</label>
+                <select name="card" id="cardOption" class="inputForm">
+                    <option value="0">-- Numero de tarjetas --</option>
+                    <option value="9">9</option>
+                    <option value="16">16</option>
+                    <option value="25">25</option>
                 </select>
             </div>
 
@@ -32,27 +57,28 @@
                 <div id="avatar">
                     <label for="avatar">avatar</label>
                     <div id="avatarContainer">
-                        <img src="#" alt="" id="avatarImg">
+                        <img src="./img/batmanAvatar.jpg" alt="" id="avatarImg" width="80px">
                     </div>
                 </div>
+
                 <div id="avatarGrid">
                     <div class="avatarItem">
-                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                        <img src="./img/batmanAvatar.jpg" class="avatarImgItem" alt="" width="35" height="45" draggable="true">
                     </div>
                     <div class="avatarItem">
-                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                        <img src="./img/robinAvatar.jpg" class="avatarImgItem" alt="" width="35" draggable="true">
                     </div>
                     <div class="avatarItem">
-                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                        <img src="./img/batgirlAvatar.jpg" class="avatarImgItem" alt="" width="35" height="44" draggable="true">
                     </div>
                     <div class="avatarItem">
-                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                        <img src="./img/jokerAvatar.jpg" class="avatarImgItem" alt="" width="35" height="44" draggable="true">
                     </div>
                     <div class="avatarItem">
-                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                        <img src="./img/harleyAvatar.jpg" class="avatarImgItem" alt="" width="35" draggable="true">
                     </div>
                     <div class="avatarItem">
-                        <img src="#" class="avatarImgItem" alt="" width="35" draggable="true">
+                        <img src="./img/misterfrioAvatar.jpg" class="avatarImgItem" alt="" width="35" height="44" draggable="true">
                     </div>
                 </div>
             </div>
