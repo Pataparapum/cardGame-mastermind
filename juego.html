@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/estiloJuego.css">
+    <title>Juego</title>
+</head>
+<body>
+    <header>
+        <div id="titulo">
+            <p >BATIMEMORIA</p>
+        </div>
+    </header>
+    <main>
+        <div id="gameContent">
+            <div id="juego">
+
+            </div>
+    
+            <div id="endgame">
+    
+            </div>
+
+        </div>
+        
+
+        <div id="userContent">
+            <form id="form_entrada" action="juego.html">
+                <div class="formBlock">
+                    <img src="./img/batmanAvatar.jpg" alt="" width="26" height="30" id="avatarImg">
+                    <input type="text" id="nick" value="nick" readonly>
+                </div>
+
+                <div class="formBlock">
+                    <label for="puntaje">Puntuación</label>
+                    <input type="text" id="puntaje" value="0" class="inputGame" readonly>
+                </div>
+
+                <div class="formBlock">
+                    <label for="tmpo">Tiempo Restante</label>
+                    <input type="text" id="tmpo" value="30" class="inputGame" readonly>
+                </div>
+
+            </form>
+        </div>
+    </main>
+    <script src="./js/datosUser.js"></script>
+    <script src="./js/juego.js"></script>
+</body>
+</html>

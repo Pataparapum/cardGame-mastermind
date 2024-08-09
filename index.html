@@ -12,11 +12,15 @@
         <img src="./img/logo.jpg" alt="Logo" id="logo">
     </header>
     <main>
-        <form action="#">
+        <form action="juego.html" id="formulario">
+
+            <div class="formBlock">
+                <p id="error" ></p>
+            </div>
 
             <div id="nickBlock" class="formBlock">
                 <label for="nick">introduce tu nick name*</label>
-                <input type="text" id="nick" class="inputForm" placeholder="nick name">
+                <input type="text" id="nick" class="inputForm" placeholder="nick name" name="nick">
             </div>
 
             <div id="levelBlock" class="formBlock">
@@ -26,17 +30,17 @@
 
                 <div id="radioRow">
                     <div class="radioBlock">
-                        <input type="radio" id="facil" name="level" class="radioInput" value="">
+                        <input type="radio" id="facil" name="level" class="radioI radioInput" value="facil" checked>  
                         <label for="facil" class="radioLabel">Facil</label>
                     </div>
     
                     <div class="radioBlock">
-                        <input type="radio" id="medio" name="level" class="radioInput" value="medio">
+                        <input type="radio" id="medio" name="level" class="radioI radioInput" value="medio">
                         <label for="medio" class="radioLabel">Medio</label>
                     </div>
     
                     <div class="radioBlock">
-                        <input type="radio" id="dificil" name="level" class="radioInput" value="dificil">
+                        <input type="radio" id="dificil" name="level" class="radioI radioInput" value="dificil">
                         <label for="dificil" class="radioLabel">Dificil</label>
                     </div>
                 </div>
@@ -47,9 +51,9 @@
                 <label for="cardNum">Tamaño*</label>
                 <select name="card" id="cardOption" class="inputForm">
                     <option value="0">-- Numero de tarjetas --</option>
-                    <option value="9">9</option>
-                    <option value="16">16</option>
-                    <option value="25">25</option>
+                    <option value="4">16</option>
+                    <option value="5">25</option>
+                    <option value="6">30</option>
                 </select>
             </div>
 
@@ -96,5 +100,9 @@
     <footer>
         
     </footer>
+
+    <script src="./js/datosUser.js"></script>
+    <script src="./js/appEvento.js"></script>
 </body>
+
 </html>
