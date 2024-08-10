@@ -8,6 +8,7 @@ var cardList=[];
 var firstCard;
 var firstId;
 var numClick=0;
+var idInterval;
 var characterList=["./img/cardBruce.jpg", "./img/cardBarbara.jpg","./img/cardDamian.jpg", 
                 "./img/cardDick.jpg", "./img/cardHelena.jpg","./img/cardIvy.jpg",
                 "./img/cardJason.jpg","./img/cardJoker.jpg","./img/cardKate.jpg",
@@ -74,11 +75,15 @@ function generarPanel() {
         }
     }
     
+    //Seteo y mescla de las cartas
     setearCartas(tamanoPanel);
     mezclarCartas();
     document.getElementById('juego').innerHTML = items;
 }
 
+/**
+ * Funcion que elimina los eventos creados en cada carta
+ */
 function eliminarEventos() {
     const cards = document.getElementsByClassName('card');
     for (let card of cards) {
@@ -86,6 +91,8 @@ function eliminarEventos() {
         card.removeEventListener('mouseup', comprobarCartas)
     }
 }
+
+
 
 /**
  * Funcion que vuelve a setear las imagenes al reverso
@@ -116,6 +123,11 @@ function rotarCarta(event) {
     numClick++
 }
 
+/**
+ * Funcion que compruba si las cartas seleccionadas son del mismo tipo
+ * sumar o restar el puntaje
+ * @param {*} event 
+ */
 function comprobarCartas(event) {
     let puntuacion = document.getElementById("puntaje");
     let puntaje = puntuacion.value
@@ -142,6 +154,27 @@ function comprobarCartas(event) {
 }
 
 /**
+ * Funcion que realiza el conteo hacia atrás del juego
+ */
+function cuentaAtras() {
+    let tiempoRestante = parseInt(document.getElementById('tmpo').value) - 1;
+    document.getElementById('tmpo').value=tiempoRestante;
+    if(tiempoRestante==0) {
+        clearInterval(idInterval);
+        //finalizar todos los eventos
+        eliminarEventos()
+
+        //Cambiar z-index paneles
+        if (tamanoPanel = 6) document.getElementById('endgame').style.height = "601px"
+        document.getElementById('endgame').classList.add('juegoAcabadoColor');
+        document.getElementById('endgame').style.zIndex=2;
+        document.getElementById('juego').style.zIndex=1;
+        document.getElementById('nuevaPartida').addEventListener('click',(e)=>location.reload())
+    }
+}
+
+
+/**
  * Funcion que añade los eventos requeridos para el funcionamiento del juego
  */
 function eventosDelJuego() {
@@ -150,6 +183,8 @@ function eventosDelJuego() {
         card.addEventListener('mousedown', rotarCarta)
         card.addEventListener('mouseup', comprobarCartas)
     }
+    //Cuenta atras
+    idInterval = setInterval(cuentaAtras, 1000);
 }
 
 getDatosUser();
