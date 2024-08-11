@@ -122,6 +122,11 @@ input {
     font-weight: 400;
 }
 
+#addRemove {
+    padding: 10px;
+    opacity: 0;
+}
+
 /*Estilos de class*/
 
 .formBlock {
@@ -134,6 +139,7 @@ input {
 }
 
 .contenedorItem {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,15 +148,46 @@ input {
     border-radius: 5px;
 }
 
-.item {
-    border-radius: 45px;
-    border: solid 10px #fff;
-    width: 35px;
-    height: 35px;
+.contenedorItem div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    transition: 0.7s;
+}
+
+.contenedorItem .front {
+    transform: perspective(500px) rotateY(180deg)
+}
+
+.contenedorItem .back {
+    transform: perspective(500px) rotateY(180deg);
+}
+
+
+.card {
+    border-radius: 5px;
+    border: solid 1px #fff;
 }
 
 .juegoAcabadoColor {
     background-color: #263238;
     transition: background-color 0.4s;
+}
+
+.appearR {
+    color: red;
+}
+
+.appearG {
+    color: green;
+}
+
+.disappear {
+    color: #f5f5f5;
+    transition: color 0.4S;
 }
 
