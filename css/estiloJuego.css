@@ -79,6 +79,7 @@ input {
     z-index: 1;
     position: absolute;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid darkgray;
@@ -98,7 +99,12 @@ input {
     width: 200px;
 }
 
-
+#endgame h2 {
+    padding-bottom: 40px;
+    color: green;
+    font-weight: 900;
+    
+}
 
 #titulo {
     margin-top: 10px;

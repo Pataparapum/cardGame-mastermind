@@ -2,13 +2,21 @@
  * JS Para el juego de memoria
  */
 
-//Declaración de vatiables globales
+/**
+ * Declaración de variables globales
+ */
+//Sobre el panel
 var tamanoPanel;
-var cardList=[];
+var idInterval;
+
+//Sobre la comprobación de las cartas
 var firstCard;
 var firstId;
+var secondId;
 var numClick=0;
-var idInterval;
+
+//Sobre el funcionamiento del juego
+var cardList=[];
 var characterList=["./img/cardBruce.jpg", "./img/cardBarbara.jpg","./img/cardDamian.jpg", 
                 "./img/cardDick.jpg", "./img/cardHelena.jpg","./img/cardIvy.jpg",
                 "./img/cardJason.jpg","./img/cardJoker.jpg","./img/cardKate.jpg",
@@ -21,6 +29,11 @@ function rellenarFormularioUser() {
     document.getElementById('nick').value = nick;
     document.getElementById('avatarImg').src = avatarImg;
     tamanoPanel=parseInt(size)
+    if (tamanoPanel == 6) {
+        document.getElementById('tmpo').value = 240;
+    } else if (tamanoPanel == 5) {
+        document.getElementById('tmpo').value = 40
+    }
 }
 
 /**
@@ -66,12 +79,12 @@ function generarPanel() {
     let items = "";
     if (size != "5") {
         for (let index = 0; index < (tamanoPanel*tamanoPanel); index++) {
-            items+=`<div class="contenedorItem"> <img src="./img/reverso.jpg" id="${index}" class="card" width="60"></img></div>`;
+            items+=`<div class="contenedorItem"> <img src="./img/reverso.jpg" id="${index}" class="card" width="60" draggable=false></img></div>`;
         }
     } else {
         document.getElementById('juego').style.height='100px'
         for (let index = 0; index < (tamanoPanel*(tamanoPanel-1)); index++)  {
-            items+=`<div class="contenedorItem contenedorCinco"> <img src="./img/reverso.jpg" id="${index}" class="card" width="60"></img></div>`;
+            items+=`<div class="contenedorItem contenedorCinco"> <img src="./img/reverso.jpg" id="${index}" class="card" width="60" draggable=false></img></div>`;
         }
     }
     
@@ -115,12 +128,56 @@ function rotarCarta(event) {
     let itemId = item.id;
     let newCard = cardList[itemId];
 
+    item.removeEventListener('mousedown', rotarCarta);
+    
     item.src = newCard;
     if (numClick == 0) {
         firstCard = newCard;
         firstId = itemId;
+    } else if (numClick == 1) {
+        secondId = itemId;
     }
     numClick++
+}
+
+function revisarVictoria() {
+    let cards = document.getElementsByClassName('card');
+    for (let card of cards) {
+        if (!card.classList.contains('rotado')) {
+            return false
+        }
+    }
+    return true
+}
+
+function getVictoria() {
+    clearInterval(idInterval);
+    document.getElementById("tmpo").value = 0
+    //finalizar todos los eventos
+    eliminarEventos()
+    
+    //Cambiar z-index paneles
+    if (tamanoPanel == 6) document.getElementById('endgame').style.height = "601px"
+    document.getElementById('endgame').classList.add('juegoAcabadoColor');
+    document.getElementById('endgame').style.zIndex=2;
+    document.getElementById('juego').style.zIndex=1;
+    document.getElementById('victoria').hidden = false
+    document.getElementById('nuevaPartida').addEventListener('click',(e)=>location.reload())
+}
+
+/**
+ * Devuelve true si los IDs dan el mismo tipo de carta en cardList
+ * o si card es igual a la primer carta seleccionada y el primer y segundo id sean distintos
+ * @param {*} card 
+ * @param {*} firstCard 
+ * @param {*} firstId 
+ * @param {*} secondId 
+ * @returns 
+ */
+function Comprobar(card, firstCard, firstId, secondId) {
+    if (cardList[firstId] == cardList[secondId]) return true
+    if (card != firstCard || firstId == secondId ) return false
+    return true;
 }
 
 /**
@@ -130,22 +187,33 @@ function rotarCarta(event) {
  */
 function comprobarCartas(event) {
     let puntuacion = document.getElementById("puntaje");
-    let puntaje = puntuacion.value
+    let puntaje = parseInt(puntuacion.value);
     if (numClick > 1) {
-        let item = event.target;
-        let card = cardList[item.id];
-        if (card == firstCard) {
-            puntuacion.value = parseInt(puntuacion.value) + 10
+        let card = cardList[secondId];
+        if ( Comprobar(card, firstCard, firstId, secondId) ) {
+            puntuacion.value = puntaje + (tamanoPanel*tamanoPanel);
 
+            //remover los eventos a los pares encontrados
+            document.getElementById(secondId).removeEventListener('mouseup', comprobarCartas);
+            document.getElementById(secondId).classList.add('rotado')
+
+            document.getElementById(firstId).removeEventListener('mouseup', comprobarCartas);
+            document.getElementById(firstId).classList.add('rotado')
+            
             firstCard="";
             firstId="";
             numClick=0;
 
-        } else {
-            eliminarEventos()
-            setTimeout(rotarAlReverso, 500, item.id, firstId)
+            if (revisarVictoria()) getVictoria();
 
-            if (puntaje > 0) puntuacion.value = puntaje - 10 
+        } else {
+            eliminarEventos();
+            setTimeout(rotarAlReverso, 500, secondId, firstId);
+
+            if (puntaje - 10 < 0) {
+                puntuacion.value = "0";
+                puntaje = 0;
+            } else if (puntaje > 0) puntuacion.value = puntaje - 10 ;
             firstCard="";
             firstId="";
             numClick=0;
@@ -165,7 +233,7 @@ function cuentaAtras() {
         eliminarEventos()
 
         //Cambiar z-index paneles
-        if (tamanoPanel = 6) document.getElementById('endgame').style.height = "601px"
+        if (tamanoPanel == 6) document.getElementById('endgame').style.height = "601px"
         document.getElementById('endgame').classList.add('juegoAcabadoColor');
         document.getElementById('endgame').style.zIndex=2;
         document.getElementById('juego').style.zIndex=1;
@@ -183,8 +251,6 @@ function eventosDelJuego() {
         card.addEventListener('mousedown', rotarCarta)
         card.addEventListener('mouseup', comprobarCartas)
     }
-    //Cuenta atras
-    idInterval = setInterval(cuentaAtras, 1000);
 }
 
 getDatosUser();
@@ -192,3 +258,5 @@ getDatosUser();
 rellenarFormularioUser();
 generarPanel();
 eventosDelJuego();
+//Cuenta atras
+idInterval = setInterval(cuentaAtras, 1000);
