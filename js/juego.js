@@ -237,6 +237,8 @@ function cuentaAtras() {
         document.getElementById('endgame').classList.add('juegoAcabadoColor');
         document.getElementById('endgame').style.zIndex=2;
         document.getElementById('juego').style.zIndex=1;
+        document.getElementById('victoria').style.color = "red"
+        document.getElementById('victoria').innerText = "Has perdido"
         document.getElementById('nuevaPartida').addEventListener('click',(e)=>location.reload())
     }
 }
